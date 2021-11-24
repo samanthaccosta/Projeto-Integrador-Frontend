@@ -1,4 +1,4 @@
-﻿import React, { ChangeEvent, useEffect, useState } from 'react'
+﻿import  { ChangeEvent, useEffect, useState } from 'react'
 import { TextField, Button, Select, InputLabel, MenuItem, FormControl, FormHelperText, Box, Container } from "@material-ui/core";
 import { Typography, Grid } from "@mui/material"
 import './CadastroPost.css';
@@ -7,14 +7,14 @@ import Tema from '../../../models/Tema';
 import Postagem from '../../../models/Postagem';
 import { busca, buscaId, post } from '../../../services/Service';
 import { useSelector } from 'react-redux';
-import { TokenState } from '../../../store/tokens/tokensReducer';
+import { UserState } from '../../../store/user/UserReducer';
 import { toast } from 'react-toastify';
 
 function CadastroPost() {
     let history = useHistory();
     const { id } = useParams<{ id: string }>();
     const [temas, setTemas] = useState<Tema[]>([])
-    const token = useSelector<TokenState, TokenState["tokens"]>(
+    const token = useSelector<UserState, UserState["tokens"]>(
         (state) => state.tokens
     );
 
@@ -92,7 +92,7 @@ function CadastroPost() {
     async function onSubmit(e: ChangeEvent<HTMLFormElement>) {
         e.preventDefault()
 
-        if (id == undefined && tema.nome != "" && postagem.titulo != "" && postagem.texto != "") {
+        if (id === undefined && tema.nome !== "" && postagem.titulo !== "" && postagem.texto !== "") {
             post(`/postagens`, postagem, setPostagem, {
                 headers: {
                     'Authorization': token
@@ -111,7 +111,7 @@ function CadastroPost() {
             back()
         }
 
-        else if (id !== undefined && tema.nome != "" && postagem.titulo != "" && postagem.texto != "") {
+        else if (id !== undefined && tema.nome !== "" && postagem.titulo !== "" && postagem.texto !== "") {
             post(`/postagens`, postagem, setPostagem, {
                 headers: {
                     'Authorization': token

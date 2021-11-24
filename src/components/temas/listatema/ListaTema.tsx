@@ -1,23 +1,17 @@
-import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
-import { Box, Card, CardActions, CardContent, Button, Typography, Grid } from '@mui/material';
+import { useState, useEffect } from 'react'
+import { Box, Card,CardContent,Typography, Grid } from '@mui/material';
 import Tema from '../../../models/Tema';
 import './ListaTema.css';
-import { useHistory } from 'react-router-dom';
 import { busca } from '../../../services/Service';
 import { useSelector } from 'react-redux';
-import { TokenState } from '../../../store/tokens/tokensReducer';
-import { toast } from 'react-toastify';
+import { UserState} from '../../../store/user/UserReducer';
+
 
 function ListaTema() {
   const [temas, setTemas] = useState<Tema[]>([])
-  let history = useHistory();
-  const token = useSelector<TokenState, TokenState["tokens"]>(
+  const token = useSelector<UserState, UserState["tokens"]>(
     (state) => state.tokens
   );
-
- 
-
 
   async function getTema() {
     await busca("/temas", setTemas, {

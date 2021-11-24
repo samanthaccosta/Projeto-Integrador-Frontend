@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react'
-import { Box, Card, CardActions, CardContent, Button, Typography } from '@material-ui/core';
+import { useEffect, useState } from 'react'
+import { Box,Button, Typography } from '@material-ui/core';
 import './DeletarTema.css';
 import { useHistory, useParams } from 'react-router-dom';
 import { buscaId, deleteId } from '../../../services/Service';
 import Tema from '../../../models/Tema';
 import { Grid } from '@mui/material';
 import { useSelector } from 'react-redux';
-import { TokenState } from '../../../store/tokens/tokensReducer';
+import { UserState } from '../../../store/user/UserReducer';
 import { toast } from 'react-toastify';
 
 
@@ -14,12 +14,12 @@ function DeletarTema() {
   let history = useHistory();
   const { id } = useParams<{ id: string }>();
   const [tema, setTema] = useState<Tema>()
-  const token = useSelector<TokenState, TokenState["tokens"]>(
+  const token = useSelector<UserState, UserState["tokens"]>(
     (state) => state.tokens
   );
 
   useEffect(() => {
-    if (token == "") {
+    if (token === "") {
       toast.error('Você precisa estar logado!', {
         position: 'top-right',
         autoClose: 2000,
@@ -68,7 +68,7 @@ function DeletarTema() {
   }
 
   function nao() {
-    history.push('/temasadmin')
+    history.push('/formularioTema')
   }
 
   return (

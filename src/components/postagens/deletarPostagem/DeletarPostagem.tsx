@@ -1,23 +1,23 @@
-import React, { useEffect, useState } from 'react'
-import { Typography, Button, Box, Card, CardActions, CardContent, Grid } from "@mui/material"
+import { useEffect, useState } from 'react'
+import { Typography, Button, Box, Grid } from "@mui/material"
 import './DeletarPostagem.css';
 import { useHistory, useParams } from 'react-router-dom';
 import Postagem from '../../../models/Postagem';
 import { buscaId, deleteId } from '../../../services/Service';
 import { useSelector } from 'react-redux';
-import { TokenState } from '../../../store/tokens/tokensReducer';
+import { UserState } from '../../../store/user/UserReducer';
 import { toast } from 'react-toastify';
 
 function DeletarPostagem() {
   let history = useHistory();
   const { id } = useParams<{ id: string }>();
   const [post, setPosts] = useState<Postagem>()
-  const token = useSelector<TokenState, TokenState["tokens"]>(
+  const token = useSelector<UserState, UserState["tokens"]>(
     (state) => state.tokens
   );
 
   useEffect(() => {
-    if (token == "") {
+    if (token === "") {
         toast.error('Você precisa estar logado!', {
             position: 'top-right',
             autoClose: 2000,

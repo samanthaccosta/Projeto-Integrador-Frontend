@@ -1,23 +1,18 @@
-import React from 'react'
 import { AppBar, Toolbar, Typography, Box } from '@mui/material';
 import { Link } from 'react-router-dom';
 import './NavBar.css'
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { TokenState } from '../../../store/tokens/tokensReducer';
-import { addName, addTipoUsuario, addToken } from '../../../store/tokens/actions';
+import { UserState } from '../../../store/user/UserReducer';
+import { addName, addTipoUsuario, addToken } from '../../../store/user/actions';
 import { toast } from 'react-toastify';
 
 function NavBar() {
 
-    const token = useSelector<TokenState, TokenState["tokens"]>(
+    const token = useSelector<UserState, UserState["tokens"]>(
         (state) => state.tokens
     );
-    const nome = useSelector<TokenState, TokenState["names"]>(
-        (state) => state.names
-    );
-
-    const tipoUsuario = useSelector<TokenState, TokenState["tipoUsuario"]>(
+    const tipoUsuario = useSelector<UserState, UserState["tipoUsuario"]>(
         (state) => state.tipoUsuario
     );
     let history = useHistory();
@@ -42,7 +37,7 @@ function NavBar() {
 
     var navbarComponent; 
     var cadastrarTema
-    if (tipoUsuario == 'admin') {  
+    if (tipoUsuario === 'Admin' && token !== undefined) {  
         cadastrarTema = <Link to="/formularioTema" className="text-decorator-none">
             <Box mx={1} className='cursor'>
                 <Typography variant="h6" color="inherit">
@@ -52,7 +47,7 @@ function NavBar() {
         </Link>
     }
 
-    if (token != '') {
+    if (token !== '') {
         navbarComponent = <AppBar position="static" className="cor-navBar">
             <Toolbar variant="dense">
                 <Box>

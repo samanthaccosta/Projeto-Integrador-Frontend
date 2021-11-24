@@ -1,20 +1,19 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
-import { Box, Typography, Grid, Button } from '@mui/material';
-import useLocalStorage from 'react-use-localstorage';
-import { busca, post, } from '../../../services/Service';
+import { Box, Typography, Grid} from '@mui/material';
+import { busca} from '../../../services/Service';
 import Postagem from '../../../models/Postagem';
 import "./ListaPostagem.css";
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useSelector } from 'react-redux';
-import { TokenState } from '../../../store/tokens/tokensReducer';
+import { UserState } from '../../../store/user/UserReducer';
 import { toast } from 'react-toastify';
 
 function ListaPostagem() {
     const [posts, setPosts] = useState<Postagem[]>([])
     let history = useHistory();
-    const token = useSelector<TokenState, TokenState["tokens"]>(
+    const token = useSelector<UserState, UserState["tokens"]>(
         (state) => state.tokens
     );
 
@@ -57,14 +56,14 @@ function ListaPostagem() {
                         <Grid container >
                             <Grid item xs={12} display='flex' justifyContent='center' alignItems='center'>
                                 <Box className='containerListPost'>
-                                    <Box alignItems='center' justifyContent='center'>
+                                    <Box alignItems='center' justifyContent='center' p={5}>
                                         <Typography variant="body2" textAlign='left' style={{ fontWeight: 'bold', color: '#224a59' }}>
                                             {post.usuario?.nome}
                                         </Typography>
                                         <Typography variant="h5" gutterBottom align='center' justifyContent='center'>
                                             {post.titulo}
                                         </Typography>
-                                        <Typography variant="body1" align='center' component="p" noWrap>
+                                        <Typography variant="body1" align='center' textAlign='justify' component="p" marginBottom="10px">
                                             {post.texto}
                                         </Typography>
                                     </Box>

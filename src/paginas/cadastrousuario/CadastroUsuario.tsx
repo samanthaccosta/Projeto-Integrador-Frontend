@@ -1,4 +1,4 @@
-import React, { useState, useEffect, ChangeEvent } from 'react';
+import { useState, useEffect, ChangeEvent } from 'react';
 import { Grid, Box, Typography, TextField, Button, FormControl, InputLabel, Select, MenuItem, FormHelperText } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
@@ -18,6 +18,7 @@ function CadastroUsuario() {
             nome: '',
             tipoUsuario: '',
             usuario: '',
+            foto: '',
             senha: ''
         })
     const [userResult, setUserResult] = useState<User>(
@@ -26,10 +27,11 @@ function CadastroUsuario() {
             nome: '',
             tipoUsuario: '',
             usuario: '',
+            foto: '', 
             senha: ''
         })
     useEffect(() => {
-        if (userResult.id != 0) {
+        if (userResult.id !== 0) {
             history.push("/login")
         }
     }, [userResult])
@@ -48,7 +50,7 @@ function CadastroUsuario() {
 
     async function onSubmit(e: ChangeEvent<HTMLFormElement>) {
         e.preventDefault()
-        if (user.senha.length >= 8 && user.nome.length > 2 && confirmarSenha == user.senha) {
+        if (user.senha.length >= 8 && user.nome.length > 2 && confirmarSenha === user.senha) {
             cadastroUsuario(`/usuarios/cadastrar`, user, setUserResult)
             toast.success('Usuário cadastrado com sucesso!', {
                 position: 'top-right',
@@ -106,13 +108,15 @@ function CadastroUsuario() {
                             <form onSubmit={onSubmit}>
                                 <Typography className='txtFieldColor' align="left">Senha</Typography>
                                 <TextField value={user.senha} onChange={(e: ChangeEvent<HTMLInputElement>) => updatedModel(e)} id="senha" label="digite sua senha" variant="outlined" name="senha" type="password" fullWidth className="campo-de-texto2" placeholder='Min 8 caracteres' />
-                                <Typography className='txtFieldColor' align="left">Confirmar senha</Typography>
+                                <Typography className='txtFieldColor' align="left">Confirmar senha</Typography>                 
                                 <TextField value={confirmarSenha} onChange={(e: ChangeEvent<HTMLInputElement>) => confirmarSenhaHandle(e)} id="confirmarSenha" label="confirmar senha" variant="outlined" name="confirmarSenha" type="password" fullWidth className="campo-de-texto2" />
+                                <Typography className='txtFieldColor' align="left">Foto do perfil (opcional)</Typography>
+                                <TextField value={user.foto} onChange={(e: ChangeEvent<HTMLInputElement>) => updatedModel(e)} id="foto do perfil" label="foto" variant="outlined" name="foto" fullWidth className="campo-de-texto2" placeholder='insira a URL da imagem'/>
                             </form>
-                            <Box display='flex' marginTop='25px'>
+                            <Box display='flex' marginTop='10px'> 
                                 <form onSubmit={onSubmit}>
                                     <Link to='/login' className="textDecoration">
-                                        <Button size="small" variant="contained" className='botao-cancel'>
+                                        <Button size="small" variant="contained" className='botao-cancel'> 
                                             Cancelar
                                         </Button>
                                     </Link>

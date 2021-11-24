@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { Box, Card, CardActions, CardContent, Button, Typography, Grid } from '@mui/material';
 import Tema from '../../../models/Tema';
@@ -6,18 +6,18 @@ import './ListaTema.css';
 import { useHistory } from 'react-router-dom';
 import { busca } from '../../../services/Service';
 import { useSelector } from 'react-redux';
-import { TokenState } from '../../../store/tokens/tokensReducer';
+import { UserState } from '../../../store/user/UserReducer';
 import { toast } from 'react-toastify';
 
 function ListaTema() {
   const [temas, setTemas] = useState<Tema[]>([])
   let history = useHistory();
-  const token = useSelector<TokenState, TokenState["tokens"]>(
+  const token = useSelector<UserState, UserState["tokens"]>(
     (state) => state.tokens
   );
 
   useEffect(() => {
-    if (token == "") {
+    if (token === "") {
         toast.error('Você precisa estar logado!', {
             position: 'top-right',
             autoClose: 2000,

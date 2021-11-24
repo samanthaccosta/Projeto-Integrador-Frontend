@@ -1,12 +1,14 @@
-import React, { useState, useEffect, ChangeEvent } from 'react'
+import { useState, useEffect, ChangeEvent } from 'react'
 import { Box, Grid, Typography, TextField, Button } from '@mui/material'
 import { Link, useHistory } from 'react-router-dom';
 import { login } from '../../services/Service';
 import './Login.css';
 import UserLogin from '../../models/UserLogin';
 import { useDispatch } from 'react-redux';
-import { addName, addTipoUsuario, addToken } from '../../store/tokens/actions';
+import { addFoto,addName,addTipoUsuario, addToken, addUsuario } from '../../store/user/actions';
 import {toast} from 'react-toastify';
+import { addId } from '../../store/id/actionsId';
+
 
 
 
@@ -20,6 +22,7 @@ function Login() {
             nome:'',
             usuario: '',
             tipoUsuario: '',
+            foto:'https://i.imgur.com/CpL4vfZ.png',
             senha: '',
             token: ''
         }
@@ -31,6 +34,7 @@ function Login() {
             nome:'',
             usuario:'',
             tipoUsuario: '',
+            foto:'',
             senha: '',
             token: ''
         }
@@ -48,10 +52,13 @@ function Login() {
 
     useEffect(() => {
        
-        if (respUserLogin.token != '') {
-            dispatch(addToken(respUserLogin.token));
+        if (respUserLogin.token !== '') {
+            dispatch(addToken(respUserLogin.token)); 
+            dispatch(addId(respUserLogin.id)); 
             dispatch(addName(respUserLogin.nome));
             dispatch(addTipoUsuario(respUserLogin.tipoUsuario));
+            dispatch(addFoto(respUserLogin.foto));
+            dispatch(addUsuario(respUserLogin.usuario));
             history.push('/home')
         }
     }, [respUserLogin.token])

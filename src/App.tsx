@@ -17,6 +17,9 @@ import { Provider } from 'react-redux';
 import store from './store/store';
 import {ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Perfil from './components/usuarios/perfil/Perfil';
+import EditUsuario from './components/usuarios/editusuario/EditUsuario';
+
 
 
 function App() {
@@ -66,6 +69,10 @@ function App() {
             </Route>
             <Route path='/deletarPostagem/:id'>
               <DeletarPostagem />
+            </Route>
+    
+            <Route exact path='/editusuario/:id'>
+              <EditUsuario />
             </Route>
           </div>
         </Switch>

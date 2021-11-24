@@ -1,12 +1,11 @@
-import React from 'react'
 import './Footer.css';
 
 import { Typography, Box, Grid } from '@mui/material';
 import { useSelector } from 'react-redux';
-import { TokenState } from '../../../store/tokens/tokensReducer';
+import { UserState } from '../../../store/user/UserReducer';
 
 function Footer() {
-    const token = useSelector<TokenState, TokenState["tokens"]>(
+    const token = useSelector<UserState, UserState["tokens"]>(
         (state) => state.tokens
       );
 

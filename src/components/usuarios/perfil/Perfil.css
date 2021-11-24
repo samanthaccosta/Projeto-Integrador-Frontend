@@ -1,0 +1,15 @@
+.btnEdit{
+    background-color:#224a59!important;
+}
+
+.imgPerfil{
+    width: 300px;
+    height: 300px; 
+    border-radius: 2px;
+    margin-bottom: 20px;
+    
+}
+.txtPerfil{
+    background-color: #f5f5f5;
+    margin-left: 10px!important;
+}
