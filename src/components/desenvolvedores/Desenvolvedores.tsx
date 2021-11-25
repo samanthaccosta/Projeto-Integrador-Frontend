@@ -1,8 +1,11 @@
+import React from 'react'
 import { Box, Typography } from '@mui/material' 
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
+import Button from '@mui/material/Button';
+import InstagramIcon from '@material-ui/icons/Instagram';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import './Desenvolvedores.css';
@@ -17,6 +20,7 @@ function Desenvolvedores() {
                     height="200"
                     image="https://i.imgur.com/9VSrhzV.jpg"
                     alt="Desenvolvedor"
+                    
                 />
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="div" className='fonte-nome'>
@@ -61,7 +65,7 @@ function Desenvolvedores() {
                         <a href="https://github.com/larissacost" target="_blank">
                             <GitHubIcon className='colorIcon' />
                         </a>
-                        <a href="https://www.linkedin.com/in/larissaimdacosta067841123/" target="_blank">
+                        <a href="www.linkedin.com/in/larissaimdacosta" target="_blank">
                             <LinkedInIcon className='colorIcon' />
                         </a>
                     </Box>
@@ -89,7 +93,7 @@ function Desenvolvedores() {
                         <a href="https://github.com/samanthaccosta" target="_blank">
                             <GitHubIcon className='colorIcon' />
                         </a>
-                        <a href="https://www.linkedin.com/in/samantha-costa-0290b91a7/" target="_blank">
+                        <a href="https://www.linkedin.com/mwlite/in/samantha-costa-" target="_blank">
                             <LinkedInIcon className='colorIcon' />
                         </a>
                     </Box>
