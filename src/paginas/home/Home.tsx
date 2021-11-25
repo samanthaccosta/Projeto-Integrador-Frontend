@@ -42,27 +42,25 @@ function Home() {
     }, [token])
     return (
         <>
-            <Grid container direction='row' justifyContent="center" className='fundo-home' display='flex'> 
+            <Grid container direction='row' justifyContent="center" className='fundo-home' display='flex'>
                 <Grid item xs={2}>
                     <Box display="flex" className="containerHome" marginRight="20px">
                         <Box style={{ width: '100%', borderRadius: '15px' }} my={2}>
-                        <img src={foto} alt="" className='imgPost' />
+                            <img src={foto} alt="" className='imgPost' />
                             <Typography variant="h5" > {nome} </Typography>
                         </Box>
                         <Box display='flex' flexDirection='column'>
-                           <Box display='flex' justifyContent='center'>  
-                                <Box marginBottom='25px'> 
-                                    <ModalUsuario/> 
+                            <Box display='flex' justifyContent='center'>
+                                <Box marginBottom='25px'>
+                                    <ModalUsuario />
                                 </Box>
                             </Box>
-                            <Box display='flex' my={1}> 
+                            <Box display='flex' my={1}>
                                 <Typography variant="h6" marginX="10px" textAlign="center">
                                     Chat
                                 </Typography>
                                 <Box mx={1}>
-                                    <a href="" target="_blank">
-                                        <ChatIcon className='iconHome' />
-                                    </a>
+                                    <ChatIcon className='iconHome' />
                                 </Box>
                             </Box>
                             <Box display='flex' my={1}>
@@ -70,19 +68,15 @@ function Home() {
                                     Favoritos
                                 </Typography>
                                 <Box mx={1}>
-                                    <a href="" target="_blank">
-                                        <FavoriteBorderIcon className='iconHome' />
-                                    </a>
+                                    <FavoriteBorderIcon className='iconHome' />
                                 </Box>
                             </Box>
-                            <Box display='flex' my={1}> 
+                            <Box display='flex' my={1}>
                                 <Typography variant="h6" marginX="10px" textAlign="center">
                                     Contate-nos
                                 </Typography>
                                 <Box mx={1}>
-                                    <a href="" target="_blank">
-                                        <EmailIcon className='iconHome' />
-                                    </a>
+                                    <EmailIcon className='iconHome' />
                                 </Box>
                             </Box>
                         </Box>
@@ -92,7 +86,7 @@ function Home() {
                 <Grid item xs={6} justifyContent='center' alignItems='center'>
                     <Box display='flex' className='containerForm' height='100px'>
                         <Box justifyContent='left' width='20%' >
-                        <img src={foto} alt="" className='imgPost' />
+                            <img src={foto} alt="" className='imgPost' />
                         </Box>
                         <Box width='80%'>
                             <ModalPostagem />
