@@ -1,5 +1,5 @@
 import { useState, useEffect, ChangeEvent } from 'react';
-import { Grid, Box, Typography, TextField, Button, FormControl, InputLabel, Select, MenuItem, FormHelperText } from '@material-ui/core';
+import { Grid, Box, Typography, TextField, Button} from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import './CadastroUsuario.css';
@@ -16,7 +16,7 @@ function CadastroUsuario() {
         {
             id: 0,
             nome: '',
-            tipoUsuario: '',
+            tipoUsuario: 'Comum',
             usuario: '',
             foto: '',
             senha: ''
@@ -27,7 +27,7 @@ function CadastroUsuario() {
             nome: '',
             tipoUsuario: '',
             usuario: '',
-            foto: '', 
+            foto: '',
             senha: ''
         })
     useEffect(() => {
@@ -51,26 +51,42 @@ function CadastroUsuario() {
     async function onSubmit(e: ChangeEvent<HTMLFormElement>) {
         e.preventDefault()
         if (user.senha.length >= 8 && user.nome.length > 2 && confirmarSenha === user.senha) {
-            cadastroUsuario(`/usuarios/cadastrar`, user, setUserResult)
-            toast.success('Usuário cadastrado com sucesso!', {
-                position: 'top-right',
-                autoClose: 2000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: false, 
-                draggable: false, 
-                theme: 'colored', 
-                progress: undefined
-            })
+            if (user.usuario.indexOf("@") != -1 && user.usuario.indexOf(".") != -1) { 
+                cadastroUsuario(`/usuarios/cadastrar`, user, setUserResult)
+                toast.success('Usuário cadastrado com sucesso!', {
+                    position: 'top-right',
+                    autoClose: 2000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: false,
+                    draggable: false,
+                    theme: 'colored',
+                    progress: undefined
+
+                })
+            }
+            else {
+                toast.error('Preencha os campos corretamente', {
+                    position: 'top-right',
+                    autoClose: 2000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: false,
+                    draggable: false,
+                    theme: 'colored',
+                    progress: undefined
+                })
+            }
+
         } else {
             toast.error('Preencha os campos corretamente', {
                 position: 'top-right',
                 autoClose: 2000,
                 hideProgressBar: false,
                 closeOnClick: true,
-                pauseOnHover: false, 
-                draggable: false, 
-                theme: 'colored', 
+                pauseOnHover: false,
+                draggable: false,
+                theme: 'colored',
                 progress: undefined
             })
         }
@@ -88,35 +104,22 @@ function CadastroUsuario() {
                                 <TextField value={user.nome} onChange={(e: ChangeEvent<HTMLInputElement>) => updatedModel(e)} id="nome" label="digite seu nome" variant="outlined" name="nome" fullWidth className="campo-de-texto1" />
                                 <Typography className='txtFieldColor' align="left">Usuario</Typography>
                                 <TextField value={user.usuario} onChange={(e: ChangeEvent<HTMLInputElement>) => updatedModel(e)} id="usuario" label="digite seu email" variant="outlined" name="usuario" fullWidth className="campo-de-texto1" placeholder='exemplo@email.com' />
-                                <Typography className='txtFieldColor' align="left">Tipo de usuario</Typography>
-                                <FormControl >
-                                    <InputLabel id="demo-simple-select-helper-label" ></InputLabel>
-                                    <Select
-                                        labelId="demo-simple-select-helper-label"
-                                        id="demo-simple-select-helper"
-                                        name='tipoUsuario'
-                                        onChange={(e: any) => updatedModel(e)}
-                                    >
-                                        <MenuItem value="Admin">Admin</MenuItem>
-                                        <MenuItem value="Comum">Comum</MenuItem>
-                                    </Select>
-                                    <FormHelperText>Escolha o tipo de usuario</FormHelperText>
-                                </FormControl>
+                                <Typography className='txtFieldColor' align="left">Foto do perfil (opcional)</Typography>
+                                <TextField value={user.foto} onChange={(e: ChangeEvent<HTMLInputElement>) => updatedModel(e)} id="foto do perfil" label="escolha a sua foto" variant="outlined" name="foto" fullWidth className="campo-de-texto1" placeholder='insira o link da imagem' />
                             </form>
                         </Box>
                         <Box className="boxlogin2">
                             <form onSubmit={onSubmit}>
                                 <Typography className='txtFieldColor' align="left">Senha</Typography>
                                 <TextField value={user.senha} onChange={(e: ChangeEvent<HTMLInputElement>) => updatedModel(e)} id="senha" label="digite sua senha" variant="outlined" name="senha" type="password" fullWidth className="campo-de-texto2" placeholder='Min 8 caracteres' />
-                                <Typography className='txtFieldColor' align="left">Confirmar senha</Typography>                 
+                                <Typography className='txtFieldColor' align="left">Confirmar senha</Typography>
                                 <TextField value={confirmarSenha} onChange={(e: ChangeEvent<HTMLInputElement>) => confirmarSenhaHandle(e)} id="confirmarSenha" label="confirmar senha" variant="outlined" name="confirmarSenha" type="password" fullWidth className="campo-de-texto2" />
-                                <Typography className='txtFieldColor' align="left">Foto do perfil (opcional)</Typography>
-                                <TextField value={user.foto} onChange={(e: ChangeEvent<HTMLInputElement>) => updatedModel(e)} id="foto do perfil" label="foto" variant="outlined" name="foto" fullWidth className="campo-de-texto2" placeholder='insira a URL da imagem'/>
+                               
                             </form>
-                            <Box display='flex' marginTop='10px'> 
+                            <Box display='flex' marginTop='10px'>
                                 <form onSubmit={onSubmit}>
                                     <Link to='/login' className="textDecoration">
-                                        <Button size="small" variant="contained" className='botao-cancel'> 
+                                        <Button size="small" variant="contained" className='botao-cancel'>
                                             Cancelar
                                         </Button>
                                     </Link>
