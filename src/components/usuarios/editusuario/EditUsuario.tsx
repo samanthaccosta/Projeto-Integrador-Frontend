@@ -79,23 +79,36 @@ function CadastroUsuario() {
         console.log("usuario " + JSON.stringify(user))
 
         if (id !== undefined && user.senha.length >= 8 && user.nome.length > 2 && confirmarSenha === user.senha) {
-
-            editUsuario(`/usuarios/atualizar`, user, setUser, {
-                headers: {
-                    'Authorization': token
-                }
-            })
-            toast.success('Usuário atualizado com sucesso!', {
-                position: 'top-right',
-                autoClose: 2000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: false,
-                draggable: false,
-                theme: 'colored',
-                progress: undefined
-            })
-            back()
+            if (user.usuario.indexOf("@") != -1 && user.usuario.indexOf(".") != -1) {
+                editUsuario(`/usuarios/atualizar`, user, setUser, {
+                    headers: {
+                        'Authorization': token
+                    }
+                })
+                toast.success('Usuário atualizado com sucesso!', {
+                    position: 'top-right',
+                    autoClose: 2000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: false,
+                    draggable: false,
+                    theme: 'colored',
+                    progress: undefined
+                })
+                back()
+            } else {
+                toast.error("Preencha os campos corretamente!", {
+                    position: 'top-right',
+                    autoClose: 2000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: false,
+                    draggable: false,
+                    theme: 'colored',
+                    progress: undefined
+                });
+            }
+           
         }
         else {
             toast.error("Preencha os campos corretamente!", {
@@ -159,5 +172,6 @@ function CadastroUsuario() {
 }
 
 export default CadastroUsuario;
+
 
 
